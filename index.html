@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malakh Tarot Fortune Teller</title>
+    <style>
+        .card {
+            width: 250px;
+            height: 400px;
+            background-color: lightgrey;
+            border: 1px solid black;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .card img {
+            max-width: 80%;
+            max-height: 60%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="card" id="cardContainer">
+        <h2>Your Tarot Card</h2>
+        <img id="cardImage" src="" alt="Tarot Card Image">
+        <p id="cardName"></p>
+        <p id="cardMeaning"></p>
+    </div>
+    <button id="tellMeBtn">Tell me!!!</button>
+
+    <script>
+        const tarotCards = [
+        { name: "The Fool", meaning: "New beginnings, innocence, spontaneity", image: "images/the-fool.jpg" },
+        { name: "The Magician", meaning: "Manifestation, resourcefulness, power", image: "images/the-magician.jpg" },
+        { name: "The High Priestess", meaning: "Intuition, subconscious, mystery", image: "images/the-hp.jpg" },
+        { name: "The Empress", meaning: "Femininity, beauty, nature", image: "images/the-empress.jpg" },
+        { name: "The Emperor", meaning: "Authority, establishment, structure", image: "images/the-emperor.jpg" },
+        { name: "The Hierophant", meaning: "Tradition, conformity, beliefs", image: "images/the-hierophant.jpg" },
+        { name: "The Lovers", meaning: "Love, union, choices", image: "images/the-lover.jpg" },
+        { name: "The Chariot", meaning: "Control, willpower, success", image: "images/the-chariot.jpg" },
+        { name: "Strength", meaning: "Courage, inner strength, compassion", image: "images/strength.jpg" },
+        { name: "The Hermit", meaning: "Solitude, introspection, guidance", image: "images/the-hermit.jpg" },
+        { name: "Wheel of Fortune", meaning: "Luck, karma, life cycles", image: "images/wof.jpg" },
+        { name: "Justice", meaning: "Fairness, truth, cause and effect", image: "images/justice.jpg" },
+        { name: "The Hanged Man", meaning: "Sacrifice, release, perspective", image: "images/the-hm.jpg" },
+        { name: "Death", meaning: "Endings, change, transformation", image: "images/death.jpg" },
+        { name: "Temperance", meaning: "Balance, moderation, patience", image: "images/temperance.jpg" },
+        { name: "The Devil", meaning: "Materialism, bondage, ignorance", image: "images/the-devil.jpg" },
+        { name: "The Tower", meaning: "Disaster, upheaval, sudden change", image: "images/the-tower.jpg" },
+        { name: "The Star", meaning: "Hope, inspiration, generosity", image: "images/the-star.jpg" },
+        { name: "The Moon", meaning: "Illusion, fear, subconscious", image: "images/the-moon.jpg" },
+        { name: "The Sun", meaning: "Success, joy, vitality", image: "images/the-sun.jpg" },
+        { name: "Judgement", meaning: "Judgement, rebirth, inner calling", image: "images/judgement.jpg" },
+        { name: "The World", meaning: "Completion, fulfillment, wholeness", image: "images/the-world.jpg" }
+        ];
+
+        function drawCard() {
+            const randomIndex = Math.floor(Math.random() * tarotCards.length);
+            const card = tarotCards[randomIndex];
+            document.getElementById('cardImage').src = card.image;
+            document.getElementById('cardName').textContent = card.name;
+            document.getElementById('cardMeaning').textContent = card.meaning;
+        }
+
+        document.getElementById('tellMeBtn').addEventListener('click', drawCard);
+    </script>
+    </center>
+</body>
+</html>
