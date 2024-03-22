@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Fortune Teller</title>
+    <style>
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            background-image: url('images/back.jpg');
+            background-size: cover;
+            border: 1px solid black;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #selected-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 650px; /* Fixed width for selected card container */
+        }
+
+        .selected-card {
+            width: 200px;
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .selected-card img {
+            max-width: 100%;
+            max-height: 200px; /* Adjust height if needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Three Cards</h1>
+    <div class="card-container" id="cardContainer">
+        <!-- Display shuffled cards with shared back image -->
+        <!-- Display all 23 cards -->
+        <div class="card" onclick="selectCard(0)"></div>
+        <div class="card" onclick="selectCard(1)"></div>
+        <div class="card" onclick="selectCard(2)"></div>
+        <div class="card" onclick="selectCard(3)"></div>
+        <div class="card" onclick="selectCard(4)"></div>
+        <div class="card" onclick="selectCard(5)"></div>
+        <div class="card" onclick="selectCard(6)"></div>
+        <div class="card" onclick="selectCard(7)"></div>
+        <div class="card" onclick="selectCard(8)"></div>
+        <div class="card" onclick="selectCard(9)"></div>
+        <div class="card" onclick="selectCard(10)"></div>
+        <div class="card" onclick="selectCard(11)"></div>
+        <div class="card" onclick="selectCard(12)"></div>
+        <div class="card" onclick="selectCard(13)"></div>
+        <div class="card" onclick="selectCard(14)"></div>
+        <div class="card" onclick="selectCard(15)"></div>
+        <div class="card" onclick="selectCard(16)"></div>
+        <div class="card" onclick="selectCard(17)"></div>
+        <div class="card" onclick="selectCard(18)"></div>
+        <div class="card" onclick="selectCard(19)"></div>
+        <div class="card" onclick="selectCard(20)"></div>
+        <div class="card" onclick="selectCard(21)"></div>
+        <div class="card" onclick="selectCard(22)"></div>
+        <div class="card" onclick="selectCard(23)"></div>
+        <!-- Add remaining cards here -->
+        <!-- For the sake of brevity, remaining cards are omitted -->
+    </div>
+    <div id="selected-cards" style="display: none;">
+        <!-- Display selected cards with actual images and meanings -->
+    </div>
+
+    <script>
+        const tarotCards = [
+        { name: "The Fool", meaning: "New beginnings, innocence, spontaneity", image: "images/the-fool.jpg" },
+        { name: "The Magician", meaning: "Manifestation, resourcefulness, power", image: "images/the-magician.jpg" },
+        { name: "The High Priestess", meaning: "Intuition, subconscious, mystery", image: "images/the-hp.jpg" },
+        { name: "The Empress", meaning: "Femininity, beauty, nature", image: "images/the-empress.jpg" },
+        { name: "The Emperor", meaning: "Authority, establishment, structure", image: "images/the-emperor.jpg" },
+        { name: "The Hierophant", meaning: "Tradition, conformity, beliefs", image: "images/the-hierophant.jpg" },
+        { name: "The Lovers", meaning: "Love, union, choices", image: "images/the-lover.jpg" },
+        { name: "The Chariot", meaning: "Control, willpower, success", image: "images/the-chariot.jpg" },
+        { name: "Strength", meaning: "Courage, inner strength, compassion", image: "images/strength.jpg" },
+        { name: "The Hermit", meaning: "Solitude, introspection, guidance", image: "images/the-hermit.jpg" },
+        { name: "Wheel of Fortune", meaning: "Luck, karma, life cycles", image: "images/wof.jpg" },
+        { name: "Justice", meaning: "Fairness, truth, cause and effect", image: "images/justice.jpg" },
+        { name: "The Hanged Man", meaning: "Sacrifice, release, perspective", image: "images/the-hm.jpg" },
+        { name: "Death", meaning: "Endings, change, transformation", image: "images/death.jpg" },
+        { name: "Temperance", meaning: "Balance, moderation, patience", image: "images/temperance.jpg" },
+        { name: "The Devil", meaning: "Materialism, bondage, ignorance", image: "images/the-devil.jpg" },
+        { name: "The Tower", meaning: "Disaster, upheaval, sudden change", image: "images/the-tower.jpg" },
+        { name: "The Star", meaning: "Hope, inspiration, generosity", image: "images/the-star.jpg" },
+        { name: "The Moon", meaning: "Illusion, fear, subconscious", image: "images/the-moon.jpg" },
+        { name: "The Sun", meaning: "Success, joy, vitality", image: "images/the-sun.jpg" },
+        { name: "Judgement", meaning: "Judgement, rebirth, inner calling", image: "images/judgement.jpg" },
+        { name: "The World", meaning: "Completion, fulfillment, wholeness", image: "images/the-world.jpg" }
+        ];
+
+        // Add remaining 21 cards here
+        // For the sake of brevity, only two additional cards are shown
+        tarotCards.push(
+            { name: "Card Name", meaning: "Card Meaning", image: "images/card_image.jpg" },
+            { name: "Card Name", meaning: "Card Meaning", image: "images/card_image.jpg" }
+        );
+
+        // Shuffle the cards
+        tarotCards.sort(() => Math.random() - 0.5);
+
+        let selectedCards = [];
+
+        function selectCard(index) {
+            if (selectedCards.length < 3) {
+                const selectedCard = tarotCards[index];
+                // Replace background image with actual image
+                document.querySelectorAll('.card')[index].style.backgroundImage = `url('${selectedCard.image}')`;
+                selectedCards.push(selectedCard);
+                if (selectedCards.length === 3) {
+                    updateSelectedCards();
+                }
+            }
+        }
+
+        function updateSelectedCards() {
+            const selectedCardsContainer = document.getElementById('selected-cards');
+            selectedCardsContainer.innerHTML = '';
+
+            selectedCards.forEach(card => {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('selected-card');
+
+                const cardImage = document.createElement('img');
+                cardImage.src = card.image;
+                cardImage.alt = card.name;
+                cardDiv.appendChild(cardImage);
+
+                const cardMeaning = document.createElement('p');
+                cardMeaning.textContent = card.name + ": " + card.meaning;
+                cardDiv.appendChild(cardMeaning);
+
+                selectedCardsContainer.appendChild(cardDiv);
+            });
+
+            selectedCardsContainer.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
